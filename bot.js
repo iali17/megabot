@@ -389,7 +389,32 @@ client.on('message', msg => {
     else {    
         msg.author.send('Your command \`' + msg.content + '\` was not recognized. Please check it and try again, or type \`!help\` for options.');
     }
-  } 
+  } else if (msg.content.substring(0,1) == '+') {
+  
+    var args = msg.content.substring(1).split(' ');
+    var cmd = args[0];
+    var sender = msg.member;
+
+    if (msg.channel.type == 'dm') {
+      
+      msg.channel.send('Sorry, I don\'t currently support private message commands.');
+      return;
+    }
+
+    if (cmd == 'f') {
+      var emojis = ["❤", "💛", "💚", "💙", "💜", ":black_heart:", ":ohgod:", ":smug:", ":JEFF:"];
+      var emoji = emojis[Math.floor(Math.random() * emojis.length)];
+      
+      var respected = msg.content.substring(2).trim();
+      
+      if (respected) {
+        msg.channel.send(`${sender} has paid their respects for ${respected} ${emoji}`);
+      } else {
+        msg.channel.send(`${sender} has paid their respects ${emoji}`);
+      }
+
+    }
+  }
 });
 
 //
